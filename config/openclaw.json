@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.24",
+    "lastTouchedAt": "2026-03-30T14:23:29.715Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-03-30T11:47:26.474Z",
+    "lastRunVersion": "2026.3.24",
+    "lastRunCommand": "configure",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "moonshot:default": {
+        "provider": "moonshot",
+        "mode": "api_key"
+      },
+      "minimax:cn": {
+        "provider": "minimax",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "moonshot": {
+        "baseUrl": "https://api.moonshot.cn/v1",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 262144,
+            "maxTokens": 262144
+          }
+        ]
+      },
+      "minimax": {
+        "baseUrl": "https://api.minimaxi.com/anthropic",
+        "api": "anthropic-messages",
+        "authHeader": true,
+        "models": [
+          {
+            "id": "MiniMax-M2.7",
+            "name": "MiniMax M2.7",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0.3,
+              "output": 1.2,
+              "cacheRead": 0.06,
+              "cacheWrite": 0.375
+            },
+            "contextWindow": 204800,
+            "maxTokens": 131072
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "minimax/MiniMax-M2.7",
+        "fallbacks": [
+          "moonshot/kimi-k2.5"
+        ]
+      },
+      "models": {
+        "moonshot/kimi-k2.5": {
+          "alias": "Kimi"
+        },
+        "minimax/MiniMax-M2.7": {
+          "alias": "Minimax"
+        }
+      },
+      "compaction": {
+        "mode": "default"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "name": "main",
+        "workspace": "/Users/zhoujie/.openclaw/workspace",
+        "agentDir": "/Users/zhoujie/.openclaw/agents/main/agent",
+        "model": "minimax/MiniMax-M2.7",
+        "memorySearch": {
+          "enabled": true,
+          "sources": [
+            "memory"
+          ],
+          "extraPaths": [
+            "memory/",
+            "MEMORY.md"
+          ],
+          "query": {
+            "maxResults": 5,
+            "minScore": 0.75
+          },
+          "cache": {
+            "enabled": true
+          }
+        },
+        "tools": {
+          "profile": "coding",
+          "elevated": {
+            "enabled": true
+          }
+        }
+      },
+      {
+        "id": "exec-agent",
+        "name": "exec-agent",
+        "workspace": "/Users/zhoujie/.openclaw/workspace",
+        "agentDir": "/Users/zhoujie/.openclaw/agents/exec-agent/agent",
+        "model": "minimax/MiniMax-M2.7",
+        "memorySearch": {
+          "enabled": true,
+          "sources": [
+            "memory"
+          ],
+          "extraPaths": [
+            "memory/",
+            "MEMORY.md"
+          ],
+          "query": {
+            "maxResults": 3,
+            "minScore": 0.8
+          },
+          "cache": {
+            "enabled": true
+          }
+        },
+        "tools": {
+          "profile": "full",
+          "elevated": {
+            "enabled": true
+          }
+        }
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "feishu",
+        "accountId": "code"
+      }
+    },
+    {
+      "agentId": "exec-agent",
+      "match": {
+        "channel": "feishu",
+        "accountId": "exec"
+      }
+    }
+  ],
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "defaultAccount": "code",
+      "accounts": {
+        "code": {
+          "appId": "cli_a92943b24079dbd6",
+          "appSecret": "AQTU6XUKlzfqBAe9X6gE7buKrzBQX4lh",
+          "name": "Code Bot",
+          "enabled": true,
+          "typingIndicator": true,
+          "resolveSenderNames": false
+        },
+        "exec": {
+          "appId": "cli_a94dcd9846781bd3",
+          "appSecret": "59t4QlMnDSHFR50EdW2jobwMo8NOJTNc",
+          "name": "Exec Bot",
+          "enabled": true,
+          "typingIndicator": true,
+          "resolveSenderNames": false
+        }
+      },
+      "connectionMode": "websocket",
+      "domain": "feishu",
+      "dmPolicy": "pairing",
+      "groupPolicy": "allowlist",
+      "requireMention": true,
+      "streaming": false,
+      "blockStreaming": false,
+      "textChunkLimit": 1000
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "f518aaf8216704f67dc051842da661247efa1bd51f55e855"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "feishu": {
+        "enabled": true
+      }
+    }
+  }
+}
