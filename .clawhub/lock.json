@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "skills": {
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1774920125231
+    },
+    "find-skills-skill": {
+      "version": "1.0.0",
+      "installedAt": 1774920435674
+    },
+    "skill-vetter": {
+      "version": "1.0.0",
+      "installedAt": 1774920441859
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1774920446164
+    },
+    "tavily-search-skill": {
+      "version": "1.0.4",
+      "installedAt": 1774920457124
+    },
+    "notion-skill": {
+      "version": "1.0.0",
+      "installedAt": 1774920463089
+    },
+    "agent-browser-clawdbot": {
+      "version": "0.1.0",
+      "installedAt": 1774920467972
+    },
+    "proactive-agent-lite": {
+      "version": "1.0.0",
+      "installedAt": 1774920472666
+    },
+    "monitoring": {
+      "version": "1.0.0",
+      "installedAt": 1775021890209
+    },
+    "memory-setup": {
+      "version": "1.0.0",
+      "installedAt": 1775021902814
+    },
+    "code-review-assistant": {
+      "version": "1.0.0",
+      "installedAt": 1775021909266
+    },
+    "gitlab-code-review": {
+      "version": "1.2.0",
+      "installedAt": 1775021921286
+    },
+    "vetter": {
+      "version": "1.1.0",
+      "installedAt": 1775103383792
+    },
+    "mermaid-diagram": {
+      "version": "1.0.0",
+      "installedAt": 1775104227095
+    }
+  }
+}
