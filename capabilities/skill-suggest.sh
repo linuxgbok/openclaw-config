@@ -24,7 +24,7 @@ $DOC_FILES"
 
 FILE_COUNT=$(echo "$ALL_FILES" | grep -v "^$" | wc -l | tr -d ' ')
 
-if [ "$FILE_COUNT" -eq 0 ] || [ "$FILE_COUNT" = "0" ]; then
+if [ -z "$FILE_COUNT" ] || [ "$FILE_COUNT" = "0" ] || [ "$FILE_COUNT" -eq 0 ] 2>/dev/null; then
     echo "📁 未检测到任何匹配的文件"
     echo ""
     echo "💡 建议激活：context-aware（上下文感知）"
@@ -40,37 +40,43 @@ echo "----------------"
 
 # 代码审查
 CODE_REVIEW_SCORE=$(echo "$ALL_FILES" | grep -cE "\.(py|js|ts|go|java|cpp|c|rs)$" 2>/dev/null || echo "0")
-if [ "$CODE_REVIEW_SCORE" -gt 0 ]; then
+CODE_REVIEW_SCORE=$(echo "$CODE_REVIEW_SCORE" | tr -d ' ')
+if [ -n "$CODE_REVIEW_SCORE" ] && [ "$CODE_REVIEW_SCORE" -gt 0 ] 2>/dev/null; then
     echo "   code-review-assistant       ${CODE_REVIEW_SCORE}0%"
 fi
 
 # GitHub
 GITHUB_SCORE=$(echo "$ALL_FILES" | grep -cE "\.git|github|\.gitignore" 2>/dev/null || echo "0")
-if [ "$GITHUB_SCORE" -gt 0 ]; then
+GITHUB_SCORE=$(echo "$GITHUB_SCORE" | tr -d ' ')
+if [ -n "$GITHUB_SCORE" ] && [ "$GITHUB_SCORE" -gt 0 ] 2>/dev/null; then
     echo "   github                      ${GITHUB_SCORE}0%"
 fi
 
 # GitLab
 GITLAB_SCORE=$(echo "$ALL_FILES" | grep -cE "\.gitlab-ci|gitlab" 2>/dev/null || echo "0")
-if [ "$GITLAB_SCORE" -gt 0 ]; then
+GITLAB_SCORE=$(echo "$GITLAB_SCORE" | tr -d ' ')
+if [ -n "$GITLAB_SCORE" ] && [ "$GITLAB_SCORE" -gt 0 ] 2>/dev/null; then
     echo "   gitlab-code-review          ${GITLAB_SCORE}0%"
 fi
 
 # 监控
 MONITORING_SCORE=$(echo "$ALL_FILES" | grep -cE "prometheus|grafana|监控|alertmanager" 2>/dev/null || echo "0")
-if [ "$MONITORING_SCORE" -gt 0 ]; then
+MONITORING_SCORE=$(echo "$MONITORING_SCORE" | tr -d ' ')
+if [ -n "$MONITORING_SCORE" ] && [ "$MONITORING_SCORE" -gt 0 ] 2>/dev/null; then
     echo "   monitoring                  ${MONITORING_SCORE}0%"
 fi
 
 # 文档
 DOC_SCORE=$(echo "$ALL_FILES" | grep -cE "\.md|README" 2>/dev/null || echo "0")
-if [ "$DOC_SCORE" -gt 0 ]; then
+DOC_SCORE=$(echo "$DOC_SCORE" | tr -d ' ')
+if [ -n "$DOC_SCORE" ] && [ "$DOC_SCORE" -gt 0 ] 2>/dev/null; then
     echo "   notion-skill               ${DOC_SCORE}0%"
 fi
 
 # 图表
 DIAGRAM_SCORE=$(echo "$ALL_FILES" | grep -cE "\.mmd|\.puml|plantuml" 2>/dev/null || echo "0")
-if [ "$DIAGRAM_SCORE" -gt 0 ]; then
+DIAGRAM_SCORE=$(echo "$DIAGRAM_SCORE" | tr -d ' ')
+if [ -n "$DIAGRAM_SCORE" ] && [ "$DIAGRAM_SCORE" -gt 0 ] 2>/dev/null; then
     echo "   mermaid-diagram             ${DIAGRAM_SCORE}0%"
 fi
 
