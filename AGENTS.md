@@ -144,6 +144,31 @@ Reactions are lightweight social signals. Humans use them constantly — they sa
 
 Skills provide your tools. When you need one, check its `SKILL.md`. Keep local notes (camera names, SSH details, voice preferences) in `TOOLS.md`.
 
+### 🔧 能力增强工具（必须使用）
+
+**开始任务前**：
+```bash
+~/.openclaw/workspace/capabilities/skill-suggest.sh
+```
+→ 根据当前文件类型建议相关技能
+
+**执行命令前**：
+```bash
+~/.openclaw/workspace/capabilities/tool-check.sh "<command>"
+```
+→ 检查危险等级（READ/WRITE/DESTRUCTIVE）
+
+**权限敏感操作**：
+```bash
+~/.openclaw/workspace/capabilities/permission-match.sh "<command>"
+```
+→ 匹配权限规则（ALLOW/CONFIRM/DENY）
+
+**危险操作必须**：
+- 运行 tool-check.sh 检查
+- 二次确认
+- 记住已批准的操作（24h）
+
 **🎭 Voice Storytelling:** If you have `sag` (ElevenLabs TTS), use voice for stories, movie summaries, and "storytime" moments! Way more engaging than walls of text. Surprise people with funny voices.
 
 **📝 Platform Formatting:**

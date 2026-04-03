@@ -2,6 +2,16 @@
 
 Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
 
+## 🔧 能力增强工具
+
+| 工具 | 路径 | 用途 |
+|------|------|------|
+| skill-suggest | `capabilities/skill-suggest.sh` | 根据上下文建议技能 |
+| tool-check | `capabilities/tool-check.sh` | 检查命令危险等级 |
+| permission-match | `capabilities/permission-match.sh` | 匹配权限规则 |
+| hook-engine | `capabilities/hook-engine.sh` | 执行 Hook 逻辑 |
+| sync-to-github | `scripts/sync-to-github.sh` | 同步到 GitHub |
+
 ## What Goes Here
 
 Things like:
